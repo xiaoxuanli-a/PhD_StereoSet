@@ -28,7 +28,7 @@ scikit-learn
 scipy
 sentencepiece
 six==1.14.0
-spacy==2.2.4
+spacy
 srsly==1.0.2
 thinc==7.4.0
 tokenizers==0.5.2
