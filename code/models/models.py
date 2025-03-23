@@ -1,6 +1,15 @@
 import transformers 
 from torch import nn
 
+
+class LLaMALM(transformers.PreTrainedModel):
+    def __init__(self, pretrained_model):
+        pass
+
+    def __new__(self, pretrained_model):
+        return transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
+
+
 class BertLM(transformers.BertPreTrainedModel):
     def __init__(self):
         pass

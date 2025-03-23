@@ -70,6 +70,10 @@ class BiasEvaluator(object):
         self.TOKENIZER = tokenizer
         self.tokenizer = getattr(transformers, self.TOKENIZER).from_pretrained(
             self.PRETRAINED_CLASS)
+        # Add this to avoid pad_token issues with LLaMA
+        if "llama" in self.PRETRAINED_CLASS.lower():
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+
 
         self.INTRASENTENCE_MODEL = intrasentence_model
         self.INTRASENTENCE_LOAD_PATH = intrasentence_load_path
