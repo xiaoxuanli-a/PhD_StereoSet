@@ -115,7 +115,7 @@ class ScoreEvaluator(object):
         for term, scores in counts.items():
             total += scores['total']
             ss_score = 100.0 * (scores['pro'] / (scores['pro'] + scores['anti']))
-            lm_score = (scores['related'] / ((scores['pro'] + scores['anti'])* 2.0)) * 100.0
+            lm_score = (scores['related'] / (scores['total']* 2.0)) * 100.0
 
             lm_scores.append(lm_score)
             ss_scores.append(ss_score)
