@@ -1,13 +1,20 @@
 import transformers 
+import torch
 from torch import nn
 
 
 class LLaMALM(transformers.PreTrainedModel):
-    def __init__(self, pretrained_model):
-        pass
+    def __init__(self, pretrained_model, checkpoint_path=None):
+        pass  # Won't be used since we're overriding __new__
 
-    def __new__(self, pretrained_model):
-        return transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
+    def __new__(cls, pretrained_model, checkpoint_path=None):
+        model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model, policy_dtype="bfloat16")
+        if checkpoint_path:
+            print(f"Loading checkpoint from {checkpoint_path}")
+            state_dict = torch.load(checkpoint_path)
+            model.load_state_dict(state_dict)
+        return model
+
 
 
 class BertLM(transformers.BertPreTrainedModel):
