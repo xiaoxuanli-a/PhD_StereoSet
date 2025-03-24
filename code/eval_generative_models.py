@@ -108,8 +108,10 @@ class BiasEvaluator(object):
             self.PRETRAINED_CLASS).to(self.device)
         model.eval()
 
-        start_token = torch.tensor(self.tokenizer.encode(
-            self.UNCONDITIONAL_START_TOKEN)).to(self.device).unsqueeze(0)
+        # start_token = torch.tensor(self.tokenizer.encode(
+        #     self.UNCONDITIONAL_START_TOKEN)).to(self.device).unsqueeze(0)
+        
+        start_token = torch.tensor([[self.tokenizer.bos_token_id]]).to(self.device)
         initial_token_probabilities = model(start_token)
         initial_token_probabilities = torch.softmax(
             initial_token_probabilities[0], dim=-1)
