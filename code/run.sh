@@ -6,4 +6,5 @@ python eval_generative_models.py \
   --batch-size 1 \
   --input-file ../data/dev.json \
   --output-dir ./predictions \
+  --unconditional_start_token "<s>" \
   --skip-intersentence
