@@ -14,6 +14,18 @@ class LLaMALM(transformers.PreTrainedModel):
             state_dict = torch.load(checkpoint_path)
             model.load_state_dict(state_dict)
         return model
+    
+class LLaMALMDPO(transformers.PreTrainedModel):
+    def __init__(self, pretrained_model, checkpoint_path=None):
+        pass  # Won't be used since we're overriding __new__
+
+    def __new__(cls, pretrained_model, checkpoint_path="../../PhD_causalDPO/.cache/root/hh_dpo_llama3b_random_2025-03-23_00-13-18_121917/LATEST/policy.pt"):
+        model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
+        if checkpoint_path:
+            print(f"Loading checkpoint from {checkpoint_path}")
+            state_dict = torch.load(checkpoint_path)
+            model.load_state_dict(state_dict)
+        return model
 
 
 
