@@ -11,11 +11,23 @@ class LLaMALM(transformers.PreTrainedModel):
         model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
         if checkpoint_path:
             print(f"Loading checkpoint from {checkpoint_path}")
-            state_dict = torch.load(checkpoint_path)
-            model.load_state_dict(state_dict)
+            raw_ckpt = torch.load(checkpoint_path, map_location="cpu")
+            # Extract actual model state dict
+            if "state_dict" in raw_ckpt:
+                state_dict = raw_ckpt["state_dict"]
+            elif "model" in raw_ckpt:
+                state_dict = raw_ckpt["model"]
+            else:
+                # fallback: remove top-level keys like "metrics", "step_idx", etc.
+                state_dict = {k: v for k, v in raw_ckpt.items() if k.startswith("model.")}
+
+            missing, unexpected = model.load_state_dict(state_dict, strict=False)
+            print("Missing keys:", missing)
+            print("Unexpected keys:", unexpected)
+
         return model
     
-class LLaMALMDPO(transformers.PreTrainedModel):
+class LLaMALM_debiased(transformers.PreTrainedModel):
     def __init__(self, pretrained_model, checkpoint_path=None):
         pass  # Won't be used since we're overriding __new__
 
@@ -23,8 +35,20 @@ class LLaMALMDPO(transformers.PreTrainedModel):
         model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
         if checkpoint_path:
             print(f"Loading checkpoint from {checkpoint_path}")
-            state_dict = torch.load(checkpoint_path)
-            model.load_state_dict(state_dict)
+            raw_ckpt = torch.load(checkpoint_path, map_location="cpu")
+            # Extract actual model state dict
+            if "state_dict" in raw_ckpt:
+                state_dict = raw_ckpt["state_dict"]
+            elif "model" in raw_ckpt:
+                state_dict = raw_ckpt["model"]
+            else:
+                # fallback: remove top-level keys like "metrics", "step_idx", etc.
+                state_dict = {k: v for k, v in raw_ckpt.items() if k.startswith("model.")}
+
+            missing, unexpected = model.load_state_dict(state_dict, strict=False)
+            print("Missing keys:", missing)
+            print("Unexpected keys:", unexpected)
+
         return model
 
 
