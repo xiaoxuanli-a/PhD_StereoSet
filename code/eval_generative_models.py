@@ -166,7 +166,7 @@ class BiasEvaluator(object):
         assert initial_token_probabilities.shape[1] == 1
 
         model.eval()
-        clusters = self.dataloader.get_intersentence_examples()[:1000]
+        clusters = self.dataloader.get_intersentence_examples()
         predictions = []
 
         # iterate over triplets (pro, anti, neg)
