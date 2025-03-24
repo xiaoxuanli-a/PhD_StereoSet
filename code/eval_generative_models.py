@@ -321,5 +321,9 @@ if __name__ == "__main__":
     results = evaluator.evaluate()
     output_file = os.path.join(
         args.output_dir, f"predictions_{args.pretrained_class}_{args.intersentence_model}_{args.intrasentence_model}.json")
+    if args.pretrained_class == "meta-llama/Llama-3.2-3B-Instruct":
+        output_file = os.path.join(
+            args.output_dir, f"predictions_{args.pretrained_class.split('/')[-1]}_{args.intersentence_model}_{args.intrasentence_model}.json")
+    print(f"Writing results to {output_file}...")
     with open(output_file, "w+") as f:
         json.dump(results, f, indent=2)
