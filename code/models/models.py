@@ -13,10 +13,9 @@ class LLaMALM(transformers.PreTrainedModel):
             print(f"Loading checkpoint from {checkpoint_path}")
             raw_ckpt = torch.load(checkpoint_path, map_location="cpu")
             # Extract actual model state dict
-            if "state_dict" in raw_ckpt:
-                state_dict = raw_ckpt["state_dict"]
-            elif "model" in raw_ckpt:
-                state_dict = raw_ckpt["model"]
+            if "state" in raw_ckpt:
+                print("state in raw_ckpt")
+                state_dict = raw_ckpt["state"]
             else:
                 # fallback: remove top-level keys like "metrics", "step_idx", etc.
                 state_dict = {k: v for k, v in raw_ckpt.items() if k.startswith("model.")}
@@ -37,10 +36,9 @@ class LLaMALM_debiased(transformers.PreTrainedModel):
             print(f"Loading checkpoint from {checkpoint_path}")
             raw_ckpt = torch.load(checkpoint_path, map_location="cpu")
             # Extract actual model state dict
-            if "state_dict" in raw_ckpt:
-                state_dict = raw_ckpt["state_dict"]
-            elif "model" in raw_ckpt:
-                state_dict = raw_ckpt["model"]
+            if "state" in raw_ckpt:
+                print("state in raw_ckpt")
+                state_dict = raw_ckpt["state"]
             else:
                 # fallback: remove top-level keys like "metrics", "step_idx", etc.
                 state_dict = {k: v for k, v in raw_ckpt.items() if k.startswith("model.")}
