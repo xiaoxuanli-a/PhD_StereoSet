@@ -14,7 +14,7 @@ python eval_generative_models.py \
   python eval_generative_models.py \
   --pretrained-class meta-llama/Llama-3.2-3B-Instruct \
   --intrasentence-model LLaMALM_debiased \
-  --intrasentence-load-path ../../PhD_causalDPO/.cache/root/hh_dpo_llama3b_random_stereo_debias_2025-03-23_06-00-07_006205/LATEST/policy.pt \
+  --intrasentence-load-path ../../PhD_causalDPO/.cache/root/hh_dpo_llama3b_random_stereo_debias_2025-03-23_06-00-07_066205/LATEST/policy.pt \
   --tokenizer AutoTokenizer \
   --batch-size 1 \
   --input-file ../data/dev.json \
