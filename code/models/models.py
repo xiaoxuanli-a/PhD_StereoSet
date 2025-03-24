@@ -8,7 +8,7 @@ class LLaMALM(transformers.PreTrainedModel):
         pass  # Won't be used since we're overriding __new__
 
     def __new__(cls, pretrained_model, checkpoint_path=None):
-        model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model, policy_dtype="bfloat16")
+        model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
         if checkpoint_path:
             print(f"Loading checkpoint from {checkpoint_path}")
             state_dict = torch.load(checkpoint_path)
