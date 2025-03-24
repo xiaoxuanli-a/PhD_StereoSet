@@ -89,8 +89,10 @@ class ScoreEvaluator(object):
             # check pro vs anti
             if (self.id2score[pro_id] > self.id2score[anti_id]):
                 per_term_counts[example.target]["pro"] += 1.0
-            else:
+            elif (self.id2score[pro_id] < self.id2score[anti_id]):
                 per_term_counts[example.target]["anti"] += 1.0
+            else:
+                per_term_counts[example.target]["neither"] += 1.0
 
             # check pro vs unrelated
             if (self.id2score[pro_id] > self.id2score[unrelated_id]):
@@ -112,8 +114,8 @@ class ScoreEvaluator(object):
 
         for term, scores in counts.items():
             total += scores['total']
-            ss_score = 100.0 * (scores['pro'] / scores['total'])
-            lm_score = (scores['related'] / (scores['total'] * 2.0)) * 100.0
+            ss_score = 100.0 * (scores['pro'] / scores['pro'] + scores['anti'])
+            lm_score = (scores['related'] / ((scores['pro'] + scores['anti'])* 2.0)) * 100.0
 
             lm_scores.append(lm_score)
             ss_scores.append(ss_score)
