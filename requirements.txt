@@ -28,11 +28,5 @@ scikit-learn
 scipy
 sentencepiece
 six==1.14.0
-srsly
-thinc
-tokenizers
-tqdm
-transformers
-urllib3
-wasabi
-zipp
+# wasabi
+# zipp
