@@ -7,7 +7,7 @@ class LLaMALM(transformers.PreTrainedModel):
     def __init__(self, pretrained_model, checkpoint_path=None):
         pass  # Won't be used since we're overriding __new__
 
-    def __new__(cls, pretrained_model, checkpoint_path="../../PhD_causalDPO/.cache/root/hh_dpo_llama3b_random_2025-03-23_00-13-18_121917/LATEST/policy.pt"):
+    def __new__(cls, pretrained_model, checkpoint_path="/workspace/LATEST/policy.pt"):
         model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
         if checkpoint_path:
             print(f"Loading checkpoint from {checkpoint_path}")
