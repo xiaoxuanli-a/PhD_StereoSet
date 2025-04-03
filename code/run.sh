@@ -4,7 +4,7 @@ python eval_generative_models.py \
   --pretrained-class meta-llama/Llama-3.2-1B-Instruct \
   --intrasentence-model LLaMALM \
   --intrasentence-load-path /workspace/LATEST/policy.pt \
-  --intersentence-model LLaMALM \
+  --intersentence-model ModelNSP \
   --tokenizer AutoTokenizer \
   --batch-size 1 \
   --input-file ../data/dev.json \
@@ -15,7 +15,7 @@ python eval_generative_models.py \
   --pretrained-class meta-llama/Llama-3.2-1B-Instruct \
   --intrasentence-model LLaMALM_gender_debiased \
   --intrasentence-load-path /workspace/LATEST/policy.pt \
-  --intersentence-model LLaMALM_gender_debiased \
+  --intersentence-model ModelNSP \
   --tokenizer AutoTokenizer \
   --batch-size 1 \
   --input-file ../data/dev.json \
@@ -26,7 +26,7 @@ python eval_generative_models.py \
   --pretrained-class meta-llama/Llama-3.2-1B-Instruct \
   --intrasentence-model LLaMALM_race_debiased \
   --intrasentence-load-path /workspace/LATEST/policy.pt \
-  --intersentence-model LLaMALM_race_debiased \
+  --intersentence-model ModelNSP \
   --tokenizer AutoTokenizer \
   --batch-size 1 \
   --input-file ../data/dev.json \
@@ -37,7 +37,7 @@ python eval_generative_models.py \
   --pretrained-class meta-llama/Llama-3.2-1B-Instruct \
   --intrasentence-model LLaMALM_religion_debiased \
   --intrasentence-load-path /workspace/LATEST/policy.pt \
-  --intersentence-model LLaMALM_religion_debiased \
+  --intersentence-model ModelNSP \
   --tokenizer AutoTokenizer \
   --batch-size 1 \
   --input-file ../data/dev.json \
@@ -48,7 +48,7 @@ python eval_generative_models.py \
   --pretrained-class meta-llama/Llama-3.2-1B-Instruct \
   --intrasentence-model LLaMALM_profession_debiased \
   --intrasentence-load-path /workspace/LATEST/policy.pt \
-  --intersentence-model LLaMALM_profession_debiased \
+  --intersentence-model ModelNSP \
   --tokenizer AutoTokenizer \
   --batch-size 1 \
   --input-file ../data/dev.json \
