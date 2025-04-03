@@ -168,9 +168,19 @@ class GPT2LM(transformers.GPT2PreTrainedModel):
 class ModelNSP(nn.Module):
     def __init__(self, pretrained_model, nsp_dim=300):
         super(ModelNSP, self).__init__()
-        self.pretrained2model = {"xlnet": "XLNetModel", "bert": "BertModel", "roberta": "RobertaModel", "gpt2": "GPT2Model"}
-        self.model_class = self.pretrained2model[pretrained_model.lower().split("-")[0]]
-        self.core_model = getattr(transformers, self.model_class).from_pretrained(pretrained_model)
+        self.pretrained2model = {
+            "xlnet": "XLNetModel", 
+            "bert": "BertModel", 
+            "roberta": "RobertaModel", 
+            "gpt2": "GPT2Model"
+        }
+        
+        if 'llama' in pretrained_model.lower():
+            self.model_class = "LLaMALM"
+            self.core_model = transformers.AutoModel.from_pretrained(pretrained_model)
+        else:
+            self.model_class = self.pretrained2model[pretrained_model.lower().split("-")[0]]
+            self.core_model = getattr(transformers, self.model_class).from_pretrained(pretrained_model)
         self.core_model.train()
         # if pretrained_model=="gpt2-xl":
           # for name, param in self.core_model.named_parameters():
