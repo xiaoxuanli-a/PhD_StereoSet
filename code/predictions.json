@@ -1,0 +1,74 @@
+{
+  "Llama-3.2-1B-Instruct": {
+    "intrasentence": {
+      "gender": {
+        "Count": 765.0,
+        "LM Score": 91.74763014763015,
+        "SS Score": 64.49462035548991,
+        "ICAT Score": 65.15068879751415
+      },
+      "profession": {
+        "Count": 2430.0,
+        "LM Score": 88.92772408787205,
+        "SS Score": 62.960621340389324,
+        "ICAT Score": 65.8765529165615
+      },
+      "race": {
+        "Count": 2886.0,
+        "LM Score": 90.89145056617437,
+        "SS Score": 59.904326736818426,
+        "ICAT Score": 72.88707808635895
+      },
+      "religion": {
+        "Count": 237.0,
+        "LM Score": 85.79310344827586,
+        "SS Score": 55.49425287356322,
+        "ICAT Score": 76.36572334522393
+      },
+      "overall": {
+        "Count": 2106.0,
+        "LM Score": 90.06050069417174,
+        "SS Score": 61.47852360649026,
+        "ICAT Score": 69.38526902956407
+      }
+    },
+    "intersentence": {
+      "gender": {
+        "Count": 726.0,
+        "LM Score": 58.535948753340065,
+        "SS Score": 49.84945408858452,
+        "ICAT Score": 58.35970179822724
+      },
+      "profession": {
+        "Count": 2481.0,
+        "LM Score": 50.44364316007809,
+        "SS Score": 54.05831798558902,
+        "ICAT Score": 46.3493162741745
+      },
+      "race": {
+        "Count": 2928.0,
+        "LM Score": 54.96990238198062,
+        "SS Score": 54.06376783803863,
+        "ICAT Score": 50.5022039547803
+      },
+      "religion": {
+        "Count": 234.0,
+        "LM Score": 52.211685823754785,
+        "SS Score": 57.227969348659,
+        "ICAT Score": 44.66399652823652
+      },
+      "overall": {
+        "Count": 2123.0,
+        "LM Score": 53.597725639978606,
+        "SS Score": 53.64840038821371,
+        "ICAT Score": 49.68680637933321
+      }
+    },
+    "overall": {
+      "Count": 4229.0,
+      "LM Score": 71.7322440071364,
+      "SS Score": 57.59959467055161,
+      "ICAT Score": 60.82952442186957
+    }
+  }
+}
