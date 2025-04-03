@@ -197,7 +197,7 @@ class ModelNSP(nn.Module):
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, next_sentence_label=None, \
             position_ids=None, head_mask=None, labels=None):
 
-        if 'Roberta' in self.model_class or 'GPT2' in self.model_class:
+        if 'Roberta' in self.model_class or 'GPT2' in self.model_class or "LLaMALM" in self.model_class:
             outputs = self.core_model(input_ids, attention_mask=attention_mask)#, token_type_ids=token_type_ids)
         else:
             outputs = self.core_model(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)
@@ -209,6 +209,8 @@ class ModelNSP(nn.Module):
             logits = self.nsp_head(output)
         elif 'XLNet' in self.model_class: 
             logits = self.nsp_head(outputs[0][:,0,:]) 
+        elif 'LLaMALM' in self.model_class:
+            logits = self.nsp_head(outputs[0][:, 0, :])  # use the first token's hidden state
         else:
             logits = self.nsp_head(outputs[1]) 
 
