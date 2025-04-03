@@ -7,7 +7,7 @@ class LLaMALM(transformers.PreTrainedModel):
     def __init__(self, pretrained_model, checkpoint_path=None):
         pass  # Won't be used since we're overriding __new__
 
-    def __new__(cls, pretrained_model, checkpoint_path="/workspace/LATEST/policy.pt"):
+    def __new__(cls, pretrained_model, checkpoint_path="/workspace/biasDPO/biasDPO.pt"):
         model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
         if checkpoint_path:
             print(f"Loading checkpoint from {checkpoint_path}")
@@ -25,12 +25,84 @@ class LLaMALM(transformers.PreTrainedModel):
             print("Unexpected keys:", unexpected)
 
         return model
-    
-class LLaMALM_debiased(transformers.PreTrainedModel):
+
+
+class LLaMALM_gender_debiased(transformers.PreTrainedModel):
     def __init__(self, pretrained_model, checkpoint_path=None):
         pass  # Won't be used since we're overriding __new__
 
-    def __new__(cls, pretrained_model, checkpoint_path="/workspace/LATEST/policy.pt"):
+    def __new__(cls, pretrained_model, checkpoint_path="/workspace/biasDPO/biasDPO_gender/LATEST/policy.pt"):
+        model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
+        if checkpoint_path:
+            print(f"Loading checkpoint from {checkpoint_path}")
+            raw_ckpt = torch.load(checkpoint_path, map_location="cpu")
+            # Extract actual model state dict
+            if "state" in raw_ckpt:
+                print("state in raw_ckpt")
+                state_dict = raw_ckpt["state"]
+            else:
+                # fallback: remove top-level keys like "metrics", "step_idx", etc.
+                state_dict = {k: v for k, v in raw_ckpt.items() if k.startswith("model.")}
+
+            missing, unexpected = model.load_state_dict(state_dict, strict=False)
+            print("Missing keys:", missing)
+            print("Unexpected keys:", unexpected)
+
+        return model
+
+class LLaMALM_race_debiased(transformers.PreTrainedModel):
+    def __init__(self, pretrained_model, checkpoint_path=None):
+        pass  # Won't be used since we're overriding __new__
+
+    def __new__(cls, pretrained_model, checkpoint_path="/workspace/biasDPO/biasDPO_race/LATEST/policy.pt"):
+        model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
+        if checkpoint_path:
+            print(f"Loading checkpoint from {checkpoint_path}")
+            raw_ckpt = torch.load(checkpoint_path, map_location="cpu")
+            # Extract actual model state dict
+            if "state" in raw_ckpt:
+                print("state in raw_ckpt")
+                state_dict = raw_ckpt["state"]
+            else:
+                # fallback: remove top-level keys like "metrics", "step_idx", etc.
+                state_dict = {k: v for k, v in raw_ckpt.items() if k.startswith("model.")}
+
+            missing, unexpected = model.load_state_dict(state_dict, strict=False)
+            print("Missing keys:", missing)
+            print("Unexpected keys:", unexpected)
+
+        return model
+
+
+class LLaMALM_religion_debiased(transformers.PreTrainedModel):
+    def __init__(self, pretrained_model, checkpoint_path=None):
+        pass  # Won't be used since we're overriding __new__
+
+    def __new__(cls, pretrained_model, checkpoint_path="/workspace/biasDPO/biasDPO_religion/LATEST/policy.pt"):
+        model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
+        if checkpoint_path:
+            print(f"Loading checkpoint from {checkpoint_path}")
+            raw_ckpt = torch.load(checkpoint_path, map_location="cpu")
+            # Extract actual model state dict
+            if "state" in raw_ckpt:
+                print("state in raw_ckpt")
+                state_dict = raw_ckpt["state"]
+            else:
+                # fallback: remove top-level keys like "metrics", "step_idx", etc.
+                state_dict = {k: v for k, v in raw_ckpt.items() if k.startswith("model.")}
+
+            missing, unexpected = model.load_state_dict(state_dict, strict=False)
+            print("Missing keys:", missing)
+            print("Unexpected keys:", unexpected)
+
+        return model
+
+
+class LLaMALM_profession_debiased(transformers.PreTrainedModel):
+    def __init__(self, pretrained_model, checkpoint_path=None):
+        pass  # Won't be used since we're overriding __new__
+
+    def __new__(cls, pretrained_model, checkpoint_path="/workspace/biasDPO/biasDPO_profession/LATEST/policy.pt"):
         model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
         if checkpoint_path:
             print(f"Loading checkpoint from {checkpoint_path}")

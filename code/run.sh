@@ -2,9 +2,53 @@
 
 python eval_generative_models.py \
   --pretrained-class meta-llama/Llama-3.2-1B-Instruct \
-  --intrasentence-model LLaMALM_debiased \
+  --intrasentence-model LLaMALM \
   --intrasentence-load-path /workspace/LATEST/policy.pt \
-  --intersentence-model LLaMALM_debiased \
+  --intersentence-model LLaMALM \
+  --tokenizer AutoTokenizer \
+  --batch-size 1 \
+  --input-file ../data/dev.json \
+  --output-dir ./predictions \
+  --unconditional_start_token "<s>" \
+
+python eval_generative_models.py \
+  --pretrained-class meta-llama/Llama-3.2-1B-Instruct \
+  --intrasentence-model LLaMALM_gender_debiased \
+  --intrasentence-load-path /workspace/LATEST/policy.pt \
+  --intersentence-model LLaMALM_gender_debiased \
+  --tokenizer AutoTokenizer \
+  --batch-size 1 \
+  --input-file ../data/dev.json \
+  --output-dir ./predictions \
+  --unconditional_start_token "<s>" \
+
+python eval_generative_models.py \
+  --pretrained-class meta-llama/Llama-3.2-1B-Instruct \
+  --intrasentence-model LLaMALM_race_debiased \
+  --intrasentence-load-path /workspace/LATEST/policy.pt \
+  --intersentence-model LLaMALM_race_debiased \
+  --tokenizer AutoTokenizer \
+  --batch-size 1 \
+  --input-file ../data/dev.json \
+  --output-dir ./predictions \
+  --unconditional_start_token "<s>" \
+
+python eval_generative_models.py \
+  --pretrained-class meta-llama/Llama-3.2-1B-Instruct \
+  --intrasentence-model LLaMALM_religion_debiased \
+  --intrasentence-load-path /workspace/LATEST/policy.pt \
+  --intersentence-model LLaMALM_religion_debiased \
+  --tokenizer AutoTokenizer \
+  --batch-size 1 \
+  --input-file ../data/dev.json \
+  --output-dir ./predictions \
+  --unconditional_start_token "<s>" \
+
+python eval_generative_models.py \
+  --pretrained-class meta-llama/Llama-3.2-1B-Instruct \
+  --intrasentence-model LLaMALM_profession_debiased \
+  --intrasentence-load-path /workspace/LATEST/policy.pt \
+  --intersentence-model LLaMALM_profession_debiased \
   --tokenizer AutoTokenizer \
   --batch-size 1 \
   --input-file ../data/dev.json \
