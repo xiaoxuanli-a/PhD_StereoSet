@@ -174,7 +174,7 @@ def parse_file(gold_file, predictions_file):
     # assuming the file follows a format of "predictions_{MODELNAME}.json"
     predictions_filename = os.path.basename(predictions_file)
     if "predictions_" in predictions_filename: 
-        pretrained_class = predictions_filename.split("_")[1]
+        pretrained_class = predictions_filename.split("_")[3]
         d[pretrained_class] = overall
     else:
         d = overall
