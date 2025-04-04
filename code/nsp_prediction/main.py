@@ -73,8 +73,9 @@ def main(args):
     else:
         model = models.ModelNSP(args.pretrained_class).to(device)
 
-    if 'llama' in args.pretrained_class.lower():
+    if args.model == "LlamaModel":
         # Llama models have a different architecture
+        print("Using Llama model")
         model = models.LlamaNSP(args.pretrained_class).to(device)
 
     model.core_model.output_past = False
