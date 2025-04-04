@@ -99,7 +99,7 @@ def main(args):
     # the pretrained model has been fairly optimized, while the NSP head has been randomly initialized.
     # using different learning rates helps speed up training.
     specific_learning_rates = [{"params": model.core_model.parameters(), "lr": args.core_lr, "correct_bias": False}, {"params": model.nsp_head.parameters(), "lr": args.head_lr, "correct_bias": False}]
-    optimizer = transformers.AdamW(specific_learning_rates, lr=args.core_lr, correct_bias=False)
+    optimizer = torch.optim.AdamW(specific_learning_rates, lr=args.core_lr, correct_bias=False)
 
     fp16 = args.fp16
     if fp16: 
