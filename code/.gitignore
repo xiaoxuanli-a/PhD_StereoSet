@@ -1,2 +1,4 @@
 __pycache__/*
 models/pretrained_models/*
+
+code/nsp_prediction/wikipedia-2.5.txt
