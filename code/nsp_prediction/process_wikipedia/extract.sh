@@ -17,8 +17,7 @@ OUTPUT=$4
 python WikiExtractor.py ../wikipedia-2.5.txt \
        --json \
        --processes 8 \
-       --no_templates true  \
-       --output /out \
+       --no_templates \
        --bytes 1M \
        --compress \
        --links \
