@@ -29,7 +29,7 @@ def parse_args():
     args.add_argument("--no-cuda", default=False, action="store_true")
     args.add_argument("--dataset", default="out", type=str)
     args.add_argument("--model", default="RobertaModel", choices=["XLNetModel", "RobertaModel", "BertModel", \
-            "GPT2Model"])
+            "GPT2Model, LlamaModel"])
     args.add_argument("--pretrained-class", default="roberta-base") 
     args.add_argument("--epochs", default=1, type=int)
     args.add_argument("--data-frac", default=0.1, type=float)
