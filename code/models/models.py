@@ -222,3 +222,33 @@ class ModelNSP(nn.Module):
             loss = self.criterion(logits, labels)
             return output, loss
         return logits 
+
+
+
+class LlamaNSP(nn.Module):
+    def __init__(self, pretrained_model, nsp_dim=300):
+        super().__init__()
+        self.core_model = transformers.AutoModelForCausalLM.from_pretrained(pretrained_model)
+        self.hidden_size = self.core_model.config.hidden_size
+        self.nsp_head = nn.Sequential(nn.Linear(self.hidden_size, nsp_dim), 
+            nn.Linear(nsp_dim, nsp_dim),
+            nn.Linear(nsp_dim, 2))
+        self.criterion = nn.CrossEntropyLoss()
+
+    def forward(self, input_ids, attention_mask=None, token_type_ids=None, labels=None):
+        outputs = self.core_model(input_ids, attention_mask=attention_mask, output_hidden_states=False)
+
+        last_hidden = outputs.last_hidden_state  # shape: (batch, seq_len, hidden)
+
+        # Use the hidden state of the first token (BOS) for NSP
+        pooled_output = last_hidden[:, 0, :]  # (batch_size, hidden_size)
+        logits = self.nsp_head(pooled_output)
+
+        loss = None
+        if labels is not None:
+            output = logits
+            if type(output)==tuple:
+                output = output[0]
+            loss = self.criterion(logits, labels)
+
+        return logits, loss
