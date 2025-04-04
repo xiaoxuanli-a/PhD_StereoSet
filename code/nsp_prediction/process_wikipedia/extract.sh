@@ -14,10 +14,11 @@ PROCESSES=$2
 TEMPLATES=$3
 OUTPUT=$4
 
-python WikiExtractor.py ../wikipedia-2.5.txt \
+python WikiExtractor.py $INPUT \
        --json \
-       --processes 8 \
-       --no_templates \
+       --processes $PROCESSES \
+       --templates $TEMPLATES \
+       --output $OUTPUT \
        --bytes 1M \
        --compress \
        --links \
