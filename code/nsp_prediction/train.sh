@@ -11,5 +11,4 @@ nohup python main.py \
   --core-lr 5e-6 \
   --head-lr 1e-3 \
   --accumulation-steps 8 \
-  --fp16 \
-  --opt O1 > llama_nsp_training.log 2>&1 &
+  --fp16 > llama_nsp_training.log 2>&1 &
