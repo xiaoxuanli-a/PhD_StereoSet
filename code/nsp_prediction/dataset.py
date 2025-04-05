@@ -3,6 +3,7 @@ import json
 import nltk
 import numpy as np
 import re
+import bz2
 from pprint import pprint
 from scipy import stats
 from tqdm import tqdm
@@ -107,7 +108,8 @@ class NextSentenceDataset(Dataset):
     def _process_file(self, filename):
         d = None
         lines = []
-        with open(filename, "r", encoding="utf-8", errors="ignore") as f: 
+        open_fn = bz2.open if filename.endswith(".bz2") else open
+        with open_fn(filename, "rt", encoding="utf-8") as f:
             lines = f.readlines() 
         sentences = [self._process_line(i) for i in lines]
         return sentences
