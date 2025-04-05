@@ -89,7 +89,8 @@ def main(args):
     print(f"Gradient Accumulation Steps: {args.accumulation_steps}")
 
     tokenizer = getattr(transformers, args.tokenizer).from_pretrained(args.pretrained_class)
-    if "gpt2" in args.tokenizer.lower():
+    if "gpt2" in args.tokenizer.lower() or args.model == "LlamaModel":
+        # GPT2 and Llama models don't have a padding token, so we need to add one.
         # this enables us to do batched training, GPT2 wasn't trained with a padding token.
         tokenizer.add_special_tokens({"pad_token": "<PAD>"})
         model.core_model.resize_token_embeddings(len(tokenizer))
