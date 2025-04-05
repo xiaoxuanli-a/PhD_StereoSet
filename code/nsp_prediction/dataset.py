@@ -107,7 +107,7 @@ class NextSentenceDataset(Dataset):
     def _process_file(self, filename):
         d = None
         lines = []
-        with open(filename, "r", encoding="utf-8") as f: 
+        with open(filename, "r", encoding="utf-8", errors="ignore") as f: 
             lines = f.readlines() 
         sentences = [self._process_line(i) for i in lines]
         return sentences
