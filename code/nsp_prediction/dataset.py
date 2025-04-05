@@ -32,7 +32,7 @@ class NextSentenceDataset(Dataset):
         else:
             file_list = file_list[offset:offset+ceil(len(file_list) * data_frac)] 
         lines = []
-        self.sentences = Parallel(n_jobs=30, backend="multiprocessing", verbose=1)(delayed(self._process_file)(i) for i in file_list) 
+        self.sentences = Parallel(n_jobs=20, backend="multiprocessing", verbose=1)(delayed(self._process_file)(i) for i in file_list) 
         self.max_seq_length = max_seq_length
         random.seed(9)
         self.memo = []
