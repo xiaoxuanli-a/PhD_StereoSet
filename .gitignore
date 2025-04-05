@@ -173,12 +173,6 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-
-code/nsp_prediction/wikipedia-2.5.txtcode/nsp_prediction/process_wikipedia/None
-code/nsp_prediction/process_wikipedia/enwiki.xml.bz2
-code/nsp_prediction/process_wikipedia/output/
-code/nsp_prediction/process_wikipedia/wget-log
-
 code/nsp_prediction/process_wikipedia/None
 code/nsp_prediction/process_wikipedia/enwiki.xml.bz2
 code/nsp_prediction/process_wikipedia/output/
