@@ -55,19 +55,19 @@ class NextSentenceDataset(Dataset):
                     self.examples.append(e)
 
         print("Precomputing all tokenization in the dataset...")
-        for idx, example in tqdm(enumerate(self.examples), total=len(self.examples)):
-            context = example.context
-            sentence = example.sentence
-            encoded_dict = self.tokenizer.encode_plus(text=context, text_pair=sentence, add_special_tokens=True, \
-                max_length=self.max_seq_length, truncation_strategy="longest_first", pad_to_max_length=True, \
-                return_tensors=None, return_token_type_ids=True, return_attention_mask=True, \
-                return_overflowing_tokens=False, return_special_tokens_mask=False) 
+        # for idx, example in tqdm(enumerate(self.examples), total=len(self.examples)):
+        #     context = example.context
+        #     sentence = example.sentence
+        #     encoded_dict = self.tokenizer.encode_plus(text=context, text_pair=sentence, add_special_tokens=True, \
+        #         max_length=self.max_seq_length, truncation_strategy="longest_first", pad_to_max_length=True, \
+        #         return_tensors=None, return_token_type_ids=True, return_attention_mask=True, \
+        #         return_overflowing_tokens=False, return_special_tokens_mask=False) 
 
-            input_ids = encoded_dict['input_ids']
-            token_type_ids = encoded_dict['token_type_ids']
-            attention_mask = encoded_dict['attention_mask']
+        #     input_ids = encoded_dict['input_ids']
+        #     token_type_ids = encoded_dict['token_type_ids']
+        #     attention_mask = encoded_dict['attention_mask']
 
-            self.memo.append((input_ids, token_type_ids, attention_mask, example.label))
+        #     self.memo.append((input_ids, token_type_ids, attention_mask, example.label))
 
 
         print(f"{len(self.examples):,} examples created in the dataset.")
@@ -88,7 +88,20 @@ class NextSentenceDataset(Dataset):
         return (input_ids, token_type_ids, attention_mask, example.label)
 
     def __getitem__(self, idx):
-        return self.memo[idx] 
+        example = self.examples[idx]
+        context = example.context
+        sentence = example.sentence
+        encoded_dict = self.tokenizer.encode_plus(text=context, text_pair=sentence, add_special_tokens=True, \
+            max_length=self.max_seq_length, truncation_strategy="longest_first", pad_to_max_length=True, \
+            return_tensors=None, return_token_type_ids=True, return_attention_mask=True, \
+            return_overflowing_tokens=False, return_special_tokens_mask=False) 
+
+        input_ids = encoded_dict['input_ids']
+        token_type_ids = encoded_dict['token_type_ids']
+        attention_mask = encoded_dict['attention_mask']
+
+        return (input_ids, token_type_ids, attention_mask, example.label)
+        #return self.memo[idx] 
 
     def _add_special_tokens_sentences_pair(self, token_ids_0, token_mask_0, token_ids_1, token_mask_1):
         """
