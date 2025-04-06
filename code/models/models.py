@@ -238,7 +238,7 @@ class LlamaNSP(nn.Module):
     def forward(self, input_ids, attention_mask=None, token_type_ids=None, labels=None):
         outputs = self.core_model(input_ids, attention_mask=attention_mask, output_hidden_states=False)
 
-        last_hidden = outputs.last_hidden_state  # shape: (batch, seq_len, hidden)
+        last_hidden = outputs.logits  # shape: (batch, seq_len, hidden)
 
         # Use the hidden state of the first token (BOS) for NSP
         pooled_output = last_hidden[:, 0, :]  # (batch_size, hidden_size)
