@@ -236,12 +236,11 @@ class LlamaNSP(nn.Module):
         self.criterion = nn.CrossEntropyLoss()
 
     def forward(self, input_ids, attention_mask=None, token_type_ids=None, labels=None):
-        outputs = self.core_model(input_ids, attention_mask=attention_mask, output_hidden_states=False)
+        outputs = self.core_model(input_ids, attention_mask=attention_mask, output_hidden_states=True, return_dict=True)
 
-        last_hidden = outputs.logits  # shape: (batch, seq_len, hidden)
-
-        # Use the hidden state of the first token (BOS) for NSP
-        pooled_output = last_hidden[:, 0, :]  # (batch_size, hidden_size)
+        # Get last hidden layer output
+        last_hidden = outputs.hidden_states[-1]  # shape: (batch, seq_len, hidden_size)
+        pooled_output = last_hidden[:, 0, :]     # BOS token's embedding: (batch, hidden_size)
         logits = self.nsp_head(pooled_output)
 
         loss = None
